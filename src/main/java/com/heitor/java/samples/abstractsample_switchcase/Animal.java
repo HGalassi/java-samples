@@ -1,6 +1,5 @@
 package com.heitor.java.samples.abstractsample_switchcase;
-
-public abstract class Animal {
+public sealed abstract class Animal permits Cachorro, Coelho, Gato {
 
     public abstract String acao();
 }
