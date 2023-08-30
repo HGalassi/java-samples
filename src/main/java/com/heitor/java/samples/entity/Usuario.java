@@ -8,12 +8,22 @@ import java.sql.Date;
         name = "user-entity-graph",
         attributeNodes = {
                 @NamedAttributeNode(value = "nomeUsuario"),
-                @NamedAttributeNode(value = "ocupacao")})
+                @NamedAttributeNode(value = "ocupacao", subgraph = "ocupacao-entity-graph")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "ocupacao-entity-graph",
+                        attributeNodes = {
+                                @NamedAttributeNode("setor")
+                        }
+                )
+        })
 @Entity(name = "usuario" )
 public class Usuario implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Column(name = "id_usuario")
     private Long idUsuario;
 
     @Column(name = "nome_usuario", length = 256)
@@ -24,8 +34,8 @@ public class Usuario implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name="ocupacao_id", referencedColumnName="id_ocupacao"),
-    })    private Ocupacao ocupacao;
+            @JoinColumn(name="ocupacao_id", referencedColumnName="id_ocupacao")})
+    private Ocupacao ocupacao;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -51,11 +61,11 @@ public class Usuario implements Serializable {
         this.dataCriacao = dataCriacao;
     }
 
-    public Ocupacao getOcupacaoId() {
+    public Ocupacao getOcupacao() {
         return ocupacao;
     }
 
-    public void setOcupacaoId(Ocupacao ocupacaoId) {
+    public void setOcupacao(Ocupacao ocupacaoId) {
         this.ocupacao = ocupacaoId;
     }
 }

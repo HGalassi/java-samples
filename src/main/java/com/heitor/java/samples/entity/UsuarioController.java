@@ -1,5 +1,6 @@
 package com.heitor.java.samples.entity;
 
+import com.heitor.java.samples.dto.UsuarioDto;
 import com.heitor.java.samples.entity.service.UsuarioService;
 import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/users")
-    private List<Usuario> get(){
+    private List<UsuarioDto> get(){
         return usuarioService.getUsuarios();
     }
 }

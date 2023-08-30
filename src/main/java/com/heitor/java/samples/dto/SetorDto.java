@@ -1,31 +1,16 @@
-package com.heitor.java.samples.entity;
+package com.heitor.java.samples.dto;
 
-import jakarta.persistence.*;
+import com.heitor.java.samples.entity.Usuario;
 
-@NamedEntityGraph(name = "setor-entity-graph",
-        attributeNodes = {
-                @NamedAttributeNode("usuario")
-        })
-@Entity(name = "setor")
-public class Setor {
+public class SetorDto {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id()
-    @Column(name = "id_setor")
     private Long idSetor;
 
-    @Column(name = "andar_setor")
     private int andarSetor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(name="usuario_id", referencedColumnName="id_usuario")})
-    private Usuario usuario;
-
-    @Column(name = "numero_sala")
+    private UsuarioDto usuario;
     private int numeroSala;
 
-    @Column(name= "departamento", length = 256)
     private String departamento;
 
     public Long getIdSetor() {
@@ -44,11 +29,11 @@ public class Setor {
         this.andarSetor = andarSetor;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDto getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioDto usuario) {
         this.usuario = usuario;
     }
 
